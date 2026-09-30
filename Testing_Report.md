@@ -18,12 +18,12 @@
 
 | Test ID | Test Case | Steps | Expected Result | Actual Result | Status |
 |---|---|---|---|---|---|
-| T10 | Invalid login | Go to /login, enter a wrong password for a real email | "Invalid email or password" message shown, no session created | | |
-| T11 | Non-existent email | Go to /login, enter an email that doesn't exist in CUSTOMER | Same error message, no crash | | |
+| T10 | Invalid login | Go to /login, enter a wrong password for a real email | "Invalid email or password" message shown, no session created | "Invalid email or password" displayed on login page, no redirect occurred | Pass |
+| T11 | Non-existent email | Go to /login, enter an email that doesn't exist in CUSTOMER | Same error message, no crash | Same behavior as T10, confirmed no server error | Pass |
 | T12 | Empty form submission | On /login, click submit with both fields blank | Browser blocks submission (HTML5 "required" validation) | | |
-| T13 | Duplicate category name | In MySQL: `INSERT INTO CATEGORY (category_name) VALUES ('Electronics');` | Query fails with a UNIQUE constraint error | | |
-| T14 | Duplicate customer email | In MySQL: `INSERT INTO CUSTOMER (name, email, password) VALUES ('Test','aditi.sen@example.com','x');` | Query fails with a UNIQUE constraint error | | |
-| T15 | Foreign key violation | In MySQL: `INSERT INTO PRODUCT (seller_id, category_id, product_name, price) VALUES (999, 1, 'Fake', 10);` | Query fails — seller_id 999 doesn't exist | | |
+| T13 | Duplicate category name | In MySQL: `INSERT INTO CATEGORY (category_name) VALUES ('Electronics');` | Query fails with a UNIQUE constraint error | Error Code 1062: Duplicate entry 'Electronics' for key 'category.category_name' | Pass |
+| T14 | Duplicate customer email | In MySQL: `INSERT INTO CUSTOMER (name, email, password) VALUES ('Test','aditi.sen@example.com','x');` | Query fails with a UNIQUE constraint error | Error Code 1062: Duplicate entry 'aditi.sen@example.com' for key 'customer.email' | Pass |
+| T15 | Foreign key violation | In MySQL: `INSERT INTO PRODUCT (seller_id, category_id, product_name, price) VALUES (999, 1, 'Fake', 10);` | Query fails — seller_id 999 doesn't exist | Error Code 1452: Cannot add or update a child row, foreign key constraint 'product_ibfk_1' fails | Pass |
 | T16 | Trigger blocks over-order | Add a product to cart with quantity greater than its current stock (edit CART_ITEM directly in MySQL to a huge quantity), then checkout | Checkout fails, error message shown on cart page, no order created, stock unchanged | | |
 | T17 | Transaction rollback | Force T16's scenario and confirm in MySQL that no row was added to CUSTOMER_ORDER for that attempt | No partial order exists after a failed checkout | | |
 | T18 | Remove from cart | Add 2 items, remove 1, check /cart | Only the remaining item shown, total recalculated | | |
@@ -42,6 +42,7 @@ Then paste each test's query one at a time and record whether it succeeds or thr
 
 - Total test cases: 20
 - Automatically verified during development: 9
-- Manual tests to execute and record: 11
+- Manually executed and confirmed: 4 (T10, T13, T14, T15)
+- Remaining to execute and record: 7
 
 Fill in the Actual Result and Status (Pass/Fail) columns above after running each test, then include this file in your final submission as evidence of Phase XI (Testing).
