@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #FAF7F0;
+  --ink: #262220;
+  --ink-soft: #75695C;
+  --line: #DEDACE;
+  --accent: #1F6F50;
+  --accent-soft: #E4EFE7;
+  --danger: #A2402E;
+  --danger-soft: #F4E4E0;
+  --radius: 5px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+h1, h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.25rem; margin-top: 2.5rem; }
+
+a { color: var(--ink); }
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--ink-soft);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.nav-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+.nav-greet { font-size: 0.9rem; color: var(--ink-soft); }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+input[type="text"], select {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--ink);
+}
+
+.table-wrap { overflow-x: auto; }
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+table.data th {
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: none;
+  color: var(--ink-soft);
+  padding: 0.75rem 0.6rem;
+  border-bottom: 2px solid var(--ink);
+  white-space: nowrap;
+}
+
+table.data td {
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+table.data tr:hover td { background: var(--accent-soft); }
+
+.price { font-variant-numeric: tabular-nums; }
+
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover { background: var(--accent); }
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.btn-danger:hover { background: var(--danger-soft); }
+
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.status.cancelled { background: var(--danger-soft); color: var(--danger); }
+
+.low-stock { color: var(--danger); font-weight: 600; }
+
+.order-block {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.order-meta { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 0.75rem; }
+
+.total-line {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.25rem 0;
+}
+
+.auth-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+}
+
+.auth-box {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  width: 320px;
+}
+
+.auth-box input { width: 100%; margin-bottom: 0.75rem; }
+
+.error-text { color: var(--danger); font-size: 0.88rem; margin-bottom: 1rem; }
+
+.confirm-box {
+  max-width: 420px;
+  margin: 4rem auto;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  text-align: left;
+}
+
+.confirm-box p { color: var(--ink-soft); margin: 0.4rem 0; }
+
+@media (max-width: 640px) {
+  .site-nav { padding: 1rem; }
+  .container { padding: 1.5rem 1rem 3rem; }
+}

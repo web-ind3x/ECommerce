@@ -2,60 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<style>
-body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
-h2 { margin-top: 40px; }
-table { width: 100%; border-collapse: collapse; background: white; }
-th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-th { background: #333; color: white; }
-.low { color: #a00; font-weight: bold; }
-a { color: #333; }
-</style>
+<title>Admin — GoodStock</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Admin Dashboard</h1>
-<p><a href="/">Back to products</a> | <a href="/logout">Logout</a></p>
+{% include '_nav.html' %}
+<div class="container">
+<h1>Admin dashboard</h1>
 
-<h2>Top Selling Products</h2>
-<table>
-<tr><th>Product</th><th>Category</th><th>Units Sold</th><th>Revenue</th></tr>
+<h2>Top selling products</h2>
+<div class="table-wrap">
+<table class="data">
+<tr><th>Product</th><th>Category</th><th>Units sold</th><th>Revenue</th></tr>
 {% for p in top_products %}
-<tr><td>{{ p.product_name }}</td><td>{{ p.category_name }}</td><td>{{ p.total_sold }}</td><td>₹{{ p.total_revenue }}</td></tr>
+<tr><td>{{ p.product_name }}</td><td>{{ p.category_name }}</td><td>{{ p.total_sold }}</td><td class="price">₹{{ p.total_revenue }}</td></tr>
 {% endfor %}
 </table>
+</div>
 
-<h2>Low Stock Alerts</h2>
-<table>
-<tr><th>Product</th><th>Quantity Left</th></tr>
+<h2>Low stock alerts</h2>
+<div class="table-wrap">
+<table class="data">
+<tr><th>Product</th><th>Quantity left</th></tr>
 {% for p in low_stock %}
-<tr><td>{{ p.product_name }}</td><td class="low">{{ p.quantity }}</td></tr>
+<tr><td>{{ p.product_name }}</td><td class="low-stock">{{ p.quantity }}</td></tr>
 {% endfor %}
 </table>
+</div>
 
-<h2>Revenue by Category</h2>
-<table>
-<tr><th>Category</th><th>Total Revenue</th></tr>
+<h2>Revenue by category</h2>
+<div class="table-wrap">
+<table class="data">
+<tr><th>Category</th><th>Revenue</th></tr>
 {% for c in category_revenue %}
-<tr><td>{{ c.category_name }}</td><td>₹{{ c.revenue }}</td></tr>
+<tr><td>{{ c.category_name }}</td><td class="price">₹{{ c.revenue }}</td></tr>
 {% endfor %}
 </table>
+</div>
 
-<h2>Recent Orders</h2>
-<table>
-<tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr>
+<h2>Recent orders</h2>
+<div class="table-wrap">
+<table class="data">
+<tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr>
 {% for o in recent_orders %}
-<tr><td>{{ o.order_id }}</td><td>{{ o.name }}</td><td>₹{{ o.total_amount }}</td><td>{{ o.order_status }}</td><td>{{ o.order_date }}</td></tr>
+<tr><td>#{{ o.order_id }}</td><td>{{ o.name }}</td><td class="price">₹{{ o.total_amount }}</td><td><span class="status {% if o.order_status == 'CANCELLED' %}cancelled{% endif %}">{{ o.order_status }}</span></td><td>{{ o.order_date }}</td></tr>
 {% endfor %}
 </table>
+</div>
 
-<h2>Top Customers by Spend</h2>
-<table>
-<tr><th>Customer</th><th>Total Spent</th></tr>
+<h2>Top customers by spend</h2>
+<div class="table-wrap">
+<table class="data">
+<tr><th>Customer</th><th>Total spent</th></tr>
 {% for c in top_customers %}
-<tr><td>{{ c.name }}</td><td>₹{{ c.total_spent }}</td></tr>
+<tr><td>{{ c.name }}</td><td class="price">₹{{ c.total_spent }}</td></tr>
 {% endfor %}
 </table>
+</div>
 
+</div>
 </body>
 </html>

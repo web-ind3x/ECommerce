@@ -2,50 +2,46 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Your Cart</title>
-<style>
-body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
-table { width: 100%; border-collapse: collapse; background: white; }
-th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-th { background: #333; color: white; }
-button { padding: 6px 12px; background: #a00; color: white; border: none; border-radius: 4px; cursor: pointer; }
-.total { font-size: 18px; font-weight: bold; margin-top: 15px; }
-a { color: #333; }
-</style>
+<title>Your Cart — GoodStock</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Your Cart</h1>
-<p><a href="/">Back to products</a></p>
+{% include '_nav.html' %}
+<div class="container">
+<h1>Your cart</h1>
 {% if error %}
-<p style="color:red;">{{ error }}</p>
+<p class="error-text">{{ error }}</p>
 {% endif %}
-<table>
+<div class="table-wrap">
+<table class="data">
 <tr>
 <th>Product</th>
 <th>Price</th>
 <th>Quantity</th>
 <th>Subtotal</th>
-<th>Action</th>
+<th></th>
 </tr>
 {% for item in cart_items %}
 <tr>
 <td>{{ item.product_name }}</td>
-<td>₹{{ item.price }}</td>
+<td class="price">₹{{ item.price }}</td>
 <td>{{ item.quantity }}</td>
-<td>₹{{ item.subtotal }}</td>
+<td class="price">₹{{ item.subtotal }}</td>
 <td>
 <form method="POST" action="/remove_from_cart/{{ item.cart_item_id }}">
-<button type="submit">Remove</button>
+<button type="submit" class="btn-danger">Remove</button>
 </form>
 </td>
 </tr>
 {% endfor %}
 </table>
-<p class="total">Total: ₹{{ total }}</p>
+</div>
+<p class="total-line">Total: ₹{{ total }}</p>
 {% if cart_items %}
 <form method="POST" action="/checkout">
-<button type="submit">Checkout</button>
+<button type="submit" class="btn">Checkout</button>
 </form>
 {% endif %}
+</div>
 </body>
 </html>

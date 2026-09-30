@@ -1,0 +1,17 @@
+<nav class="site-nav">
+<a class="brand" href="/">GoodStock</a>
+<div class="nav-links">
+{% if session.customer_name %}
+<span class="nav-greet">Hi, {{ session.customer_name.split(' ')[0] }}</span>
+<a href="/">Shop</a>
+<a href="/cart">Cart</a>
+<a href="/my_orders">Orders</a>
+{% if session.customer_id == 1 %}
+<a href="/admin">Admin</a>
+{% endif %}
+<a href="/logout">Log out</a>
+{% else %}
+<a href="/login">Log in</a>
+{% endif %}
+</div>
+</nav>
